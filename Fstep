@@ -1,6 +1,14 @@
 #!/usr/bin/bash
 
 
+username=$(whoami) 
+
+Fstep=/home/$username/Fstep
+if test -d "$Fstep"; then
+	    echo "$Fstep exists."
+    else
+	    sudo mkdir /home/$username/Fstep
+fi
 
 
 
