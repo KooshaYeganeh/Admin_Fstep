@@ -1,0 +1,101 @@
+#!/usr/bin/bash
+
+
+
+
+
+
+
+echo " OS Info :"
+
+cat /etc/redhat-release 
+uname -a 
+hostnamectl 
+
+echo " ================================================================================================================================================="
+echo " Uptime of system:"
+
+uptime
+
+
+echo " =================================================================================================================================================="
+
+
+echo " Who Login:"
+
+who
+who -Hu
+grep sh$ /etc/passwd
+
+
+echo "==================================================================================================================================================="
+
+echo "check system is VM or Phisical:"
+
+sudo dmidecode -s system-manufacturer
+sudo dmidecode -s system-product-name
+sudo lshw -c system | grep product | head -1
+sudo cat /sys/class/dmi/id/product_name
+sudo cat /sys/class/dmi/id/sys_vendor
+
+echo "===================================================================================================================================================="
+
+echo "Check Hardware of System:"
+
+sudo cat /proc/cpuinfo
+sudo cat /proc/meminfo
+ifconfig -a
+sudo lshw
+sudo lspci
+sudo dmidecode
+
+echo "======================================================================================================================================================="
+
+echo "check whitch Program installed on System:"
+
+sudo rpm -qa
+sudo yum repolist
+sudo yum repoinfo
+
+echo "======================================================================================================================================================="
+
+echo "Check Process and Service on System:"
+
+sudo pstree -pa 1
+sudo ps -ef
+sudo ps auxf
+sudo systemctl
+
+
+echo "========================================================================================================================================================"
+
+echo "Check Network Connections:"
+
+
+sudo netstat -tulpn
+sudo netstat -anp
+sudo lsof -i
+sudo ss
+sudo iptables -L -n
+cat /etc/resolv.conf
+
+echo "=========================================================================================================================================================="
+
+echo "Check Kernel Modules:"
+
+lsmod
+
+
+echo "==========================================================================================================================================================="
+
+echo "Check Logs:"
+
+sudo dmesg
+
+sudo journalctl
+
+
+echo "============================================================================================================================================================"
+
+sudo iptables -nvL
+sudo iptables_save > 
