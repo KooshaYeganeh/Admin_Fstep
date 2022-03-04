@@ -242,6 +242,11 @@ Firewall(){
 
 
 
+suid(){
+	sudo find / -perm -u+s > /home/$username/Admin_Fstep/SUID
+}
+
+
 menu(){
 
 	echo "1.Start Gather system information"
@@ -262,7 +267,7 @@ menu(){
 		kernel
 		logs
 		Firewall
-
+		suid
 	elif [ "$option" = 2 ];then
 		exit 0
 	else
