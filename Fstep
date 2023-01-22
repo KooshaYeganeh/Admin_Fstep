@@ -2,14 +2,14 @@
 
 
 
-username=$(users | grep $main_user) 
+username=$USER
 
 
-time=$(date)
+time=`date`
 
 
-Admin_Fstep=/home/$username/Admin_Fstep
-if test -d "$Admin_Fstep"; then
+Admin_Fstep="/home/$username/Admin_Fstep"
+if [ -d "$Admin_Fstep" ]; then
 	    echo "$Admin_Fstep exists."
     else
 	     mkdir /home/$username/Admin_Fstep
@@ -20,8 +20,8 @@ echo "Time of Scaning System is: $time" > Time.txt
 
 os_info(){
 
-	os_info_dir=/home/$username/Admin_Fstep/OS_INFO
-	if test -d "$os_info_dir"; then
+	os_info_dir="/home/$username/Admin_Fstep/OS_INFO"
+	if [ -d "$os_info_dir" ]; then
 		    echo "$os_info_dir exists."
 	    else
 		     mkdir /home/$username/Admin_Fstep/OS_INFO
