@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+## This script is currently written for Red Hat Base systems
+## It will be developed for other systems in the future
+
 
 
 username=$USER
@@ -64,11 +67,11 @@ user(){
 
 check_vm(){
 
-	echo "check system is VM or Phisical:"
+	echo "check system is VM or physical :"
 	
 	
-	vm_info_dir=/home/$username/Admin_Fstep/VM
-	if test -d "$vm_info_dir"; then
+	vm_info_dir="/home/$username/Admin_Fstep/VM"
+	if [ -d "$vm_info_dir" ]; then
 		    echo "$vm_info_dir exists."
 	    else
 		     mkdir /home/$username/Admin_Fstep/VM
@@ -76,8 +79,8 @@ check_vm(){
 
 
 
-	 dmidecode -s system-manufacturer > /home/$username/Admin_Fstep/VM/manufacturer.txt
-	 dmidecode -s system-product-name > /home/$username/Admin_Fstep/VM/product_name.txt
+	 # dmidecode -s system-manufacturer > /home/$username/Admin_Fstep/VM/manufacturer.txt
+	 # dmidecode -s system-product-name > /home/$username/Admin_Fstep/VM/product_name.txt
 	 lshw -c system | grep product | head -1 > /home/$username/Admin_Fstep/VM/hardaware.txt
 	 cat /sys/class/dmi/id/product_name > /home/$username/Admin_Fstep/VM/pruduct_name2.txt
 	 cat /sys/class/dmi/id/sys_vendor > /home/$username/Admin_Fstep/VM/system_vendor.txt
@@ -106,11 +109,11 @@ check_hardware(){
 
 	ifconfig -a > /home/$username/Admin_Fstep/HardWare/interface_configuration.txt
 
-	 lshw > /home/$username/Admin_Fstep/HardWare/all_hw.txt
+	 sudo lshw > /home/$username/Admin_Fstep/HardWare/all_hw.txt
 
-	 lspci > /home/$username/Admin_Fstep/HardWare/pci.txt
+	 sudo lspci > /home/$username/Admin_Fstep/HardWare/pci.txt
 
-	 dmidecode > /home/$username/Admin_Fstep/HardWare/dmidecode.txt
+	 # dmidecode > /home/$username/Admin_Fstep/HardWare/dmidecode.txt
 
 
 }
@@ -127,9 +130,9 @@ programs(){
 
 	echo "check whitch Program installed on System:"
 
-	 rpm -qa > /home/$username/Admin_Fstep/APP/what_istalled.txt
-	 yum repolist > /home/$username/Admin_Fstep/APP/repolist.txt
-	 yum repoinfo > /home/$username/Admin_Fstep/APP/repositoru_info.txt
+	 sudo rpm -qa > /home/$username/Admin_Fstep/APP/what_istalled.txt
+	 # yum repolist > /home/$username/Admin_Fstep/APP/repolist.txt
+	 # yum repoinfo > /home/$username/Admin_Fstep/APP/repositoru_info.txt
 
 
 
@@ -166,16 +169,16 @@ network(){
 	echo "Check Network Connections:"
 
 
-	 netstat -tulpn > /home/$username/Admin_Fstep/Network/network_conections.txt
+	 sudo netstat -tulpn > /home/$username/Admin_Fstep/Network/network_conections.txt
 	echo "=================================================================================" > /home/$username/Admin_Fstep/Network/network_connections.txt
 	echo "============================Detail===============================================" > /home/$username/Admin_Fstep/Network/network_connections.txt
 
 
-	 netstat -anp > /home/$username/Admin_Fstep/Network/network_connections.txt
+	 sudo netstat -anp > /home/$username/Admin_Fstep/Network/network_connections.txt
 
-	 lsof -i > /home/$username/Admin_Fstep/Network/openFiles.txt
+	 sudo lsof -i > /home/$username/Admin_Fstep/Network/openFiles.txt
 
-	 ss > /home/$username/Admin_Fstep/Network/socket.txt
+	 sudo ss > /home/$username/Admin_Fstep/Network/socket.txt
 
 	cat /etc/resolv.conf > /home/$username/Admin_Fstep/Network/resolv.txt
 
@@ -196,7 +199,7 @@ kernel(){
 
 	echo "Check Kernel Modules:"
 
-	lsmod > /home/$username/Admin_Fstep/Kernel/Kernel_Modules.txt
+	sudo lsmod > /home/$username/Admin_Fstep/Kernel/Kernel_Modules.txt
 
 
 }
@@ -215,9 +218,9 @@ logs(){
 
 	echo "Check Logs:"
 
-	 dmesg > /home/$username/Admin_Fstep/LOG/dmesg.txt
+	 sudo dmesg > /home/$username/Admin_Fstep/LOG/dmesg.txt
 
-	 journalctl > /home/$username/Admin_Fstep/LOG/journal.txt
+	 sudo journalctl > /home/$username/Admin_Fstep/LOG/journal.txt
 
 
 
@@ -235,7 +238,7 @@ Firewall(){
 
 
 
-	 iptables-save >  /home/$username/Admin_Fstep/Firewall/iptables_dump 
+	 sudo iptables-save >  /home/$username/Admin_Fstep/Firewall/iptables_dump 
 
 
 }
@@ -255,11 +258,9 @@ menu(){
 	read option
 
 	if [ "$option" = 1 ];then
-		echo "Give me Username"
-		read main_user
 		os_info
 		user
-		check_vm
+		# check_vm
 		check_hardware
 		programs
 		process
