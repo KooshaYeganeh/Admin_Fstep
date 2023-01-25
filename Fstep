@@ -100,27 +100,27 @@ check_vm(){
 
 check_hardware(){
 
-	hw_info_dir=/tmp/Admin_Fstep/HardWare
-	if test -d "$hw_info_dir"; then
-		    echo "$hw_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/HardWare
-	fi
 
-
+	echo "=============================== Check Hardware ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 	echo "Check Hardware of System :"
 	
-	cat /proc/cpuinfo > /tmp/Admin_Fstep/HardWare/cpuinfo.txt
-       	cat /proc/meminfo > /tmp/Admin_Fstep/HardWare/memory_info.txt
+	echo "=============================== CPU ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	cat /proc/cpuinfo >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "=============================== Memory ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+       	cat /proc/meminfo >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	ifconfig -a > /tmp/Admin_Fstep/HardWare/interface_configuration.txt
+	echo "=============================== Network InterFace ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	ifconfig -a >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 sudo lshw > /tmp/Admin_Fstep/HardWare/all_hw.txt
+	echo "=============================== Hardware Info ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo lshw >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 sudo lspci > /tmp/Admin_Fstep/HardWare/pci.txt
+	echo "=============================== pci Connections ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo lspci >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 dmidecode > /tmp/Admin_Fstep/HardWare/dmidecode.txt
+	echo "=============================== Hardware Summery  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 }
