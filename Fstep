@@ -56,35 +56,42 @@ user(){
 
 check_vm(){
 
+	echo "============================== VM or Physical ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	echo "check system is VM or physical :"
 	
 	
-	vm_info_dir="/tmp/Admin_Fstep/VM"
-	if [ -d "$vm_info_dir" ]; then
-		    echo "$vm_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/VM
-	fi
 
 
 
-	 dmidecode -s system-manufacturer > /tmp/Admin_Fstep/VM/manufacturer.txt
-	 dmidecode -s system-product-name > /tmp/Admin_Fstep/VM/product_name.txt
-	 dmidecode -s system-version > /tmp/Admin_Fstep/VM/system_version.txt
+	echo "============================== System Manufacture ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s system-manufacturer  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== System Product Name ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s system-product-name  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== System Version ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s system-version  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	 
-	 dmidecode -s system-uuid > /tmp/Admin_Fstep/VM/system_uuid.txt
-	 dmidecode -s system-serial-number > /tmp/Admin_Fstep/VM/system-serial-number.txt
+	echo "============================== System UUID ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s system-uuid  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== System Serial Number ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s system-serial-number  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 dmidecode -s bios-version > /tmp/Admin_Fstep/VM/bios_version.txt
+	echo "============================== System Bios Version ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s bios-version  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 dmidecode -s bios-vendor > /tmp/Admin_Fstep/VM/bios_vendor.txt
+	echo "============================== System Bios Vendor ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s bios-vendor >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 dmidecode -s chassis-serial-number > /tmp/Admin_Fstep/VM/chassis_serial_number.txt
+	echo "============================== Chasis Serial Number ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 dmidecode -s chassis-serial-number >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 	 
-	 lshw -c system | grep product | head -1 > /tmp/Admin_Fstep/VM/hardaware.txt
-	 cat /sys/class/dmi/id/product_name > /tmp/Admin_Fstep/VM/pruduct_name2.txt
-	 cat /sys/class/dmi/id/sys_vendor > /tmp/Admin_Fstep/VM/system_vendor.txt
+	echo "============================== HardWare Lists ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 lshw -c system | grep product | head -1 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+	echo "============================== Product Name ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 cat /sys/class/dmi/id/product_name >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== System Vendor ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 cat /sys/class/dmi/id/sys_vendor >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 
