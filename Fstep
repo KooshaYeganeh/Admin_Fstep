@@ -18,27 +18,21 @@ if [ -d "$Admin_Fstep" ]; then
 	     mkdir /tmp/Admin_Fstep
 fi
 
-echo "Time of Scaning System is: $time" > Time.txt
+echo "Scan Start at : $time" > Linux_DataInfo.txt
 
 
 os_info(){
 
-	os_info_dir="/tmp/Admin_Fstep/OS_INFO"
-	if [ -d "$os_info_dir" ]; then
-		    echo "$os_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/OS_INFO
-	fi
 
+	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-
-	cat /etc/os-release > /tmp/Admin_Fstep/OS_INFO/os_release.txt
-	uname -a > /tmp/Admin_Fstep/OS_INFO/name.txt 
-	hostnamectl > /tmp/Admin_Fstep/OS_INFO/hostnamectl.txt 
-
-
-
-	uptime > /tmp/Admin_Fstep/OS_INFO/uptime.txt 
+	cat /etc/os-release >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	uname -a >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	hostnamectl >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	uptime >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 
