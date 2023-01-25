@@ -2,7 +2,34 @@
 What Linux Admin done for First time
 
 
-# Download
+# Install
+
+## Tools
+
+### Debian
+
+```
+sudo apt install dmidecode -y
+```
+
+### RedHat
+
+```
+sudo dnf install dmidecode -y
+```
+
+### Suse
+
+Note:There are some packages to be installed in the open Suse Leap 15.3 Distribution:
+
+```
+sudo zypper -n install lshw
+```
+
+```
+sudo zypper -n install demidecode
+```
+
 
 1) First You shoul be root:
 sudo su -
