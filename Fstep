@@ -24,14 +24,14 @@ echo "Scan Start at : $time" > Linux_DataInfo.txt
 os_info(){
 
 
-	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================= OS Release ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 	cat /etc/os-release >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	uname -a >> /tmp/Admin_Fstep/Linux_DataInfo.txt
-	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================= HostName Info ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	hostnamectl >> /tmp/Admin_Fstep/Linux_DataInfo.txt
-	echo "==================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== Uptime ================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	uptime >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
@@ -41,17 +41,12 @@ os_info(){
 
 user(){
 
-	user_info_dir=/tmp/Admin_Fstep/USER_INFO
-	if test -d "$user_info_dir"; then
-		    echo "$user_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/USER_INFO
-	fi
 
 
-
-	who -Hu > /tmp/Admin_Fstep/USER_INFO/user.txt 
-	grep sh$ /etc/passwd > /tmp/Admin_Fstep/USER_INFO/user_terminal.txt 
+	echo "============================== User ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	who -Hu >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================== User Terminal ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	grep sh$ /etc/passwd  >> /tmp/Admin_Fstep/Linux_DataInfo.txt 
 
 
 
