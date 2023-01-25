@@ -11,11 +11,11 @@ username=$USER
 time=`date`
 
 
-Admin_Fstep="/home/$username/Admin_Fstep"
+Admin_Fstep="/tmp/Admin_Fstep"
 if [ -d "$Admin_Fstep" ]; then
 	    echo "$Admin_Fstep exists."
     else
-	     mkdir /home/$username/Admin_Fstep
+	     mkdir /tmp/Admin_Fstep
 fi
 
 echo "Time of Scaning System is: $time" > Time.txt
@@ -23,22 +23,22 @@ echo "Time of Scaning System is: $time" > Time.txt
 
 os_info(){
 
-	os_info_dir="/home/$username/Admin_Fstep/OS_INFO"
+	os_info_dir="/tmp/Admin_Fstep/OS_INFO"
 	if [ -d "$os_info_dir" ]; then
 		    echo "$os_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/OS_INFO
+		     mkdir /tmp/Admin_Fstep/OS_INFO
 	fi
 
 
 
-	cat /etc/os-release > /home/$username/Admin_Fstep/OS_INFO/os_release.txt
-	uname -a > /home/$username/Admin_Fstep/OS_INFO/name.txt 
-	hostnamectl > /home/$username/Admin_Fstep/OS_INFO/hostnamectl.txt 
+	cat /etc/os-release > /tmp/Admin_Fstep/OS_INFO/os_release.txt
+	uname -a > /tmp/Admin_Fstep/OS_INFO/name.txt 
+	hostnamectl > /tmp/Admin_Fstep/OS_INFO/hostnamectl.txt 
 
 
 
-	uptime > /home/$username/Admin_Fstep/OS_INFO/uptime.txt 
+	uptime > /tmp/Admin_Fstep/OS_INFO/uptime.txt 
 
 
 
@@ -47,17 +47,17 @@ os_info(){
 
 user(){
 
-	user_info_dir=/home/$username/Admin_Fstep/USER_INFO
+	user_info_dir=/tmp/Admin_Fstep/USER_INFO
 	if test -d "$user_info_dir"; then
 		    echo "$user_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/USER_INFO
+		     mkdir /tmp/Admin_Fstep/USER_INFO
 	fi
 
 
 
-	who -Hu > /home/$username/Admin_Fstep/USER_INFO/user.txt 
-	grep sh$ /etc/passwd > /home/$username/Admin_Fstep/USER_INFO/user_terminal.txt 
+	who -Hu > /tmp/Admin_Fstep/USER_INFO/user.txt 
+	grep sh$ /etc/passwd > /tmp/Admin_Fstep/USER_INFO/user_terminal.txt 
 
 
 
@@ -70,20 +70,32 @@ check_vm(){
 	echo "check system is VM or physical :"
 	
 	
-	vm_info_dir="/home/$username/Admin_Fstep/VM"
+	vm_info_dir="/tmp/Admin_Fstep/VM"
 	if [ -d "$vm_info_dir" ]; then
 		    echo "$vm_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/VM
+		     mkdir /tmp/Admin_Fstep/VM
 	fi
 
 
 
-	 # dmidecode -s system-manufacturer > /home/$username/Admin_Fstep/VM/manufacturer.txt
-	 # dmidecode -s system-product-name > /home/$username/Admin_Fstep/VM/product_name.txt
-	 lshw -c system | grep product | head -1 > /home/$username/Admin_Fstep/VM/hardaware.txt
-	 cat /sys/class/dmi/id/product_name > /home/$username/Admin_Fstep/VM/pruduct_name2.txt
-	 cat /sys/class/dmi/id/sys_vendor > /home/$username/Admin_Fstep/VM/system_vendor.txt
+	 dmidecode -s system-manufacturer > /tmp/Admin_Fstep/VM/manufacturer.txt
+	 dmidecode -s system-product-name > /tmp/Admin_Fstep/VM/product_name.txt
+	 dmidecode -s system-version > /tmp/Admin_Fstep/VM/system_version.txt
+	 
+	 dmidecode -s system-uuid > /tmp/Admin_Fstep/VM/system_uuid.txt
+	 dmidecode -s system-serial-number > /tmp/Admin_Fstep/VM/system-serial-number.txt
+
+	 dmidecode -s bios-version > /tmp/Admin_Fstep/VM/bios_version.txt
+
+	 dmidecode -s bios-vendor > /tmp/Admin_Fstep/VM/bios_vendor.txt
+
+	 dmidecode -s chassis-serial-number > /tmp/Admin_Fstep/VM/chassis_serial_number.txt
+
+	 
+	 lshw -c system | grep product | head -1 > /tmp/Admin_Fstep/VM/hardaware.txt
+	 cat /sys/class/dmi/id/product_name > /tmp/Admin_Fstep/VM/pruduct_name2.txt
+	 cat /sys/class/dmi/id/sys_vendor > /tmp/Admin_Fstep/VM/system_vendor.txt
 
 
 
@@ -92,76 +104,76 @@ check_vm(){
 
 check_hardware(){
 
-	hw_info_dir=/home/$username/Admin_Fstep/HardWare
+	hw_info_dir=/tmp/Admin_Fstep/HardWare
 	if test -d "$hw_info_dir"; then
 		    echo "$hw_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/HardWare
+		     mkdir /tmp/Admin_Fstep/HardWare
 	fi
 
 
 
 	echo "Check Hardware of System:"
 
-	 cat /proc/cpuinfo > /home/$username/Admin_Fstep/HardWare/cpuinfo.txt
+	 cat /proc/cpuinfo > /tmp/Admin_Fstep/HardWare/cpuinfo.txt
 
-	 cat /proc/meminfo > /home/$username/Admin_Fstep/HardWare/memory_info.txt
+	 cat /proc/meminfo > /tmp/Admin_Fstep/HardWare/memory_info.txt
 
-	ifconfig -a > /home/$username/Admin_Fstep/HardWare/interface_configuration.txt
+	ifconfig -a > /tmp/Admin_Fstep/HardWare/interface_configuration.txt
 
-	 sudo lshw > /home/$username/Admin_Fstep/HardWare/all_hw.txt
+	 sudo lshw > /tmp/Admin_Fstep/HardWare/all_hw.txt
 
-	 sudo lspci > /home/$username/Admin_Fstep/HardWare/pci.txt
+	 sudo lspci > /tmp/Admin_Fstep/HardWare/pci.txt
 
-	 # dmidecode > /home/$username/Admin_Fstep/HardWare/dmidecode.txt
+	 # dmidecode > /tmp/Admin_Fstep/HardWare/dmidecode.txt
 
 
 }
 
 programs(){
 
-	app_info_dir=/home/$username/Admin_Fstep/APP
+	app_info_dir=/tmp/Admin_Fstep/APP
 	if test -d "$app_info_dir"; then
 		    echo "$app_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/APP
+		     mkdir /tmp/Admin_Fstep/APP
 	fi
 
 
 	echo "check whitch Program installed on System:"
 
-	 sudo rpm -qa > /home/$username/Admin_Fstep/APP/what_istalled.txt
-	 # yum repolist > /home/$username/Admin_Fstep/APP/repolist.txt
-	 # yum repoinfo > /home/$username/Admin_Fstep/APP/repositoru_info.txt
+	 sudo rpm -qa > /tmp/Admin_Fstep/APP/what_istalled.txt
+	 # yum repolist > /tmp/Admin_Fstep/APP/repolist.txt
+	 # yum repoinfo > /tmp/Admin_Fstep/APP/repositoru_info.txt
 
 
 
 }
 
 process(){
-	process_info_dir=/home/$username/Admin_Fstep/Process
+	process_info_dir=/tmp/Admin_Fstep/Process
 	if test -d "$process_info_dir"; then
 		    echo "$process_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/Process
+		     mkdir /tmp/Admin_Fstep/Process
 	fi
 
 
 	echo "Check Process and Service on System:"
 
-	 pstree -pa 1 > /home/$username/Admin_Fstep/Process/pstree.txt
-	 ps -ef > /home/$username/Admin_Fstep/Process/precess.txt
-	 ps auxf > /home/$username/Admin_Fstep/Process/full_process.txt
+	 pstree -pa 1 > /tmp/Admin_Fstep/Process/pstree.txt
+	 ps -ef > /tmp/Admin_Fstep/Process/precess.txt
+	 ps auxf > /tmp/Admin_Fstep/Process/full_process.txt
 
 }
 
 network(){
 
-	net_info_dir=/home/$username/Admin_Fstep/Network
+	net_info_dir=/tmp/Admin_Fstep/Network
 	if test -d "$net_info_dir"; then
 		    echo "$net_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/Network
+		     mkdir /tmp/Admin_Fstep/Network
 	fi
 
 
@@ -169,18 +181,18 @@ network(){
 	echo "Check Network Connections:"
 
 
-	 sudo netstat -tulpn > /home/$username/Admin_Fstep/Network/network_conections.txt
-	echo "=================================================================================" > /home/$username/Admin_Fstep/Network/network_connections.txt
-	echo "============================Detail===============================================" > /home/$username/Admin_Fstep/Network/network_connections.txt
+	 sudo netstat -tulpn > /tmp/Admin_Fstep/Network/network_conections.txt
+	echo "=================================================================================" > /tmp/Admin_Fstep/Network/network_connections.txt
+	echo "============================Detail===============================================" > /tmp/Admin_Fstep/Network/network_connections.txt
 
 
-	 sudo netstat -anp > /home/$username/Admin_Fstep/Network/network_connections.txt
+	 sudo netstat -anp > /tmp/Admin_Fstep/Network/network_connections.txt
 
-	 sudo lsof -i > /home/$username/Admin_Fstep/Network/openFiles.txt
+	 sudo lsof -i > /tmp/Admin_Fstep/Network/openFiles.txt
 
-	 sudo ss > /home/$username/Admin_Fstep/Network/socket.txt
+	 sudo ss > /tmp/Admin_Fstep/Network/socket.txt
 
-	cat /etc/resolv.conf > /home/$username/Admin_Fstep/Network/resolv.txt
+	cat /etc/resolv.conf > /tmp/Admin_Fstep/Network/resolv.txt
 
 
 
@@ -189,17 +201,17 @@ network(){
 kernel(){
 
 
-	kernel_info_dir=/home/$username/Admin_Fstep/Kernel
+	kernel_info_dir=/tmp/Admin_Fstep/Kernel
 	if test -d "$kernel_info_dir"; then
 		    echo "$kernel_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/Kernel
+		     mkdir /tmp/Admin_Fstep/Kernel
 	fi
 
 
 	echo "Check Kernel Modules:"
 
-	sudo lsmod > /home/$username/Admin_Fstep/Kernel/Kernel_Modules.txt
+	sudo lsmod > /tmp/Admin_Fstep/Kernel/Kernel_Modules.txt
 
 
 }
@@ -208,19 +220,19 @@ kernel(){
 
 logs(){
 
-	log_info_dir=/home/$username/Admin_Fstep/LOG
+	log_info_dir=/tmp/Admin_Fstep/LOG
 	if test -d "$log_info_dir"; then
 		    echo "$log_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/LOG
+		     mkdir /tmp/Admin_Fstep/LOG
 	fi
 
 
 	echo "Check Logs:"
 
-	 sudo dmesg > /home/$username/Admin_Fstep/LOG/dmesg.txt
+	 sudo dmesg > /tmp/Admin_Fstep/LOG/dmesg.txt
 
-	 sudo journalctl > /home/$username/Admin_Fstep/LOG/journal.txt
+	 sudo journalctl > /tmp/Admin_Fstep/LOG/journal.txt
 
 
 
@@ -229,16 +241,29 @@ logs(){
 
 Firewall(){
 
-	firewall_info_dir=/home/$username/Admin_Fstep/Firewall
+	firewall_info_dir=/tmp/Admin_Fstep/Firewall
 	if test -d "$firewall_info_dir"; then
 		    echo "$firewall_info_dir exists."
 	    else
-		     mkdir /home/$username/Admin_Fstep/Firewall
+		     mkdir /tmp/Admin_Fstep/Firewall
 	fi
 
+	firewalld_status=`sudo systemctl status firewalld | grep -o "Active: active"`
+
+	if [ "$firewalld_status" == "Active: active" ];then
+		sudo firewall-cmd --list-ports > /tmp/Admin_Fstep/firewalld.txt
+		sudo firewall-cmd --list-services >> /tmp/Admin_Fstep/firewalld.txt
+		sudo firewall-cmd --list-all >> /tmp/Admin_Fstep/firewalld.txt
+		sudo firewall-cmd --list-zones >> /tmp/Admin_Fstep/firewalld.txt
+		sudo firewall-cmd --list-all-zones >> /tmp/Admin_Fstep/firewalld.txt
+		sudo firewall-cmd --list-interfaces >> /tmp/Admin_Fstep/firewalld.txt
 
 
-	 sudo iptables-save >  /home/$username/Admin_Fstep/Firewall/iptables_dump 
+	else
+		true
+	fi
+
+	 sudo iptables-save >  /tmp/Admin_Fstep/Firewall/iptables_dump 
 
 
 }
@@ -246,15 +271,16 @@ Firewall(){
 
 
 suid(){
-	sudo find / -perm -u+s > /home/$username/Admin_Fstep/SUID
+	sudo find / -perm /4000 > /tmp/Admin_Fstep/SUID
 }
 
 
 menu(){
-
+	echo "============================================="
 	echo "1.Start Gather system information"
 	echo "2.Exit"
-	
+	echo "============================================="
+	printf "> "
 	read option
 
 	if [ "$option" = 1 ];then
