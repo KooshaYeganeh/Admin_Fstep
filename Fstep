@@ -128,19 +128,52 @@ check_hardware(){
 
 programs(){
 
-	app_info_dir=/tmp/Admin_Fstep/APP
-	if test -d "$app_info_dir"; then
-		    echo "$app_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/APP
+
+	Ubuntu=`cat /etc/os-release | grep -o ubuntu | head -1`
+	fedora=`cat /etc/os-release | grep -o ubuntu | head -1`
+	suse=`cat /etc/os-release | grep -o ubuntu | head -1`
+
+
+	if [ "$Ubuntu" == "ubuntu" ];then
+		
+	 	echo "=============================== Installed Applications  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		echo "=============================== /usr/bin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/bin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+	 	echo "=============================== /usr/sbin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/sbin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		apt list --installed >> /tmp/Admin_Fstep/APP/what_istalled.txt
+	
+	elif [ "$fedora" == "fedora" ];then
+		echo "=============================== rpm ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 	sudo rpm -qa >> /tmp/Admin_Fstep/APP/what_istalled.txt
+	 	yum repolist >> /tmp/Admin_Fstep/APP/repolist.txt
+	 	yum repoinfo >> /tmp/Admin_Fstep/APP/repositoru_info.txt
+	 	echo "=============================== Desktop Applications  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/share/applications | awk -F '.desktop' ' { print $1}' - >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+	 	echo "=============================== /usr/bin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/bin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+	 	echo "=============================== /usr/sbin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/sbin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	elif [ "$suse" == "suse" ];then
+		echo "=============================== Displaying Package (zyppper)  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		zypper search --installed-only >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		echo "=============================== Desktop Applications  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/share/applications | awk -F '.desktop' ' { print $1}' - >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+		echo "=============================== /usr/bin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/bin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		echo "=============================== /usr/sbin  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		ls /usr/sbin >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		echo "=============================== rpm  ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		rpm -qa >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	else
+		echo "Sorry... Can Noy detect Your OS or Your Distributions Not Supported"
 	fi
 
 
-	echo "check whitch Program installed on System:"
-
-	 sudo rpm -qa > /tmp/Admin_Fstep/APP/what_istalled.txt
-	 # yum repolist > /tmp/Admin_Fstep/APP/repolist.txt
-	 # yum repoinfo > /tmp/Admin_Fstep/APP/repositoru_info.txt
 
 
 }
