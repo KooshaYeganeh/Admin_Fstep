@@ -252,25 +252,27 @@ logs(){
 
 Firewall(){
 
-	firewall_info_dir=/tmp/Admin_Fstep/Firewall
-	if test -d "$firewall_info_dir"; then
-		    echo "$firewall_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/Firewall
-	fi
+	echo "=================================== Firewall ========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 	firewalld_status=`sudo systemctl status firewalld | grep -o "Active: active"`
 
-	if [ "$firewalld_status" == "Active: active" ];then
-		sudo firewall-cmd --list-ports > /tmp/Admin_Fstep/firewalld.txt
-		sudo firewall-cmd --list-services >> /tmp/Admin_Fstep/firewalld.txt
-		sudo firewall-cmd --list-all >> /tmp/Admin_Fstep/firewalld.txt
-		sudo firewall-cmd --list-all-zones >> /tmp/Admin_Fstep/firewalld.txt
-		sudo firewall-cmd --list-interfaces >> /tmp/Admin_Fstep/firewalld.txt
+	if [ -f "/usr/sbin/firewalld" ] && [ "$firewalld_status" == "Active: active" ];then
+		sudo firewall-cmd --list-ports >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-services >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-all >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-all-zones >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-interfaces >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
+	elif [ -f "/usr/sbin/firewalld" ];then
+		sudo systemctl start firewalld
+		sudo firewall-cmd --list-ports >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-services >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-all >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-all-zones >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+		sudo firewall-cmd --list-interfaces >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	else
-		true
+		echo "Firerwalld Not installed On system"
 	fi
 
 	 sudo iptables-save >  /tmp/Admin_Fstep/Firewall/iptables_dump 
