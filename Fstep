@@ -180,19 +180,15 @@ programs(){
 
 
 process(){
-	process_info_dir=/tmp/Admin_Fstep/Process
-	if test -d "$process_info_dir"; then
-		    echo "$process_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/Process
-	fi
+	echo "=============================== Process ==================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "Check Process and Service on System:"  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	
+	echo "================================= All Process ====================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	ps -ef  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	
+	ps auxf  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-
-	echo "Check Process and Service on System:"
-
-	 pstree -pa 1 > /tmp/Admin_Fstep/Process/pstree.txt
-	 ps -ef > /tmp/Admin_Fstep/Process/precess.txt
-	 ps auxf > /tmp/Admin_Fstep/Process/full_process.txt
+	echo "==========================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 }
 
