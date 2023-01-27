@@ -225,18 +225,10 @@ network(){
 
 kernel(){
 
-
-	kernel_info_dir=/tmp/Admin_Fstep/Kernel
-	if test -d "$kernel_info_dir"; then
-		    echo "$kernel_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/Kernel
-	fi
-
-
+	echo "================================= Kernel Modules ==========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	echo "Check Kernel Modules:"
 
-	sudo lsmod > /tmp/Admin_Fstep/Kernel/Kernel_Modules.txt
+	sudo lsmod >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 }
