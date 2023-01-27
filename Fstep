@@ -237,18 +237,13 @@ kernel(){
 
 logs(){
 
-	log_info_dir=/tmp/Admin_Fstep/LOG
-	if test -d "$log_info_dir"; then
-		    echo "$log_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/LOG
-	fi
+	echo "================================= Check System Logs ==========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 	echo "Check Boot Logs ..."
 	
-	sudo dmesg > /tmp/Admin_Fstep/LOG/dmesg.txt
-	sudo journalctl > /tmp/Admin_Fstep/LOG/journal.txt
+	sudo dmesg >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	sudo journalctl >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 
