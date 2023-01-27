@@ -18,11 +18,12 @@ if [ -d "$Admin_Fstep" ]; then
 	     mkdir /tmp/Admin_Fstep
 fi
 
-echo "Scan Start at : $time" > Linux_DataInfo.txt
+echo "Scan Start at : $time" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+echo "Scan Start at : $time" 
+
 
 
 os_info(){
-
 
 	echo "============================= OS Release ===================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
@@ -36,6 +37,7 @@ os_info(){
 
 
 
+	echo "Os Information check [ OK ]"
 
 }
 
@@ -50,6 +52,7 @@ user(){
 
 
 
+	echo "User Information Check [ OK ]"
 
 }
 
@@ -95,6 +98,7 @@ check_vm(){
 
 
 
+	echo "Physical or Virtual check [ OK ]"
  }
 
 
@@ -123,6 +127,7 @@ check_hardware(){
 	 dmidecode >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
+	echo "check HardWare Information [ OK ]"
 }
 
 
@@ -130,8 +135,8 @@ programs(){
 
 
 	Ubuntu=`cat /etc/os-release | grep -o ubuntu | head -1`
-	fedora=`cat /etc/os-release | grep -o ubuntu | head -1`
-	suse=`cat /etc/os-release | grep -o ubuntu | head -1`
+	fedora=`cat /etc/os-release | grep -o fedora | head -1`
+	suse=`cat /etc/os-release | grep -o suse | head -1`
 
 
 	if [ "$Ubuntu" == "ubuntu" ];then
@@ -175,6 +180,7 @@ programs(){
 
 
 
+	echo "Application check [ OK ]"
 
 }
 
@@ -190,6 +196,7 @@ process(){
 
 	echo "==========================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
+	echo "Procces check [ OK ]"
 }
 
 network(){
@@ -219,7 +226,7 @@ network(){
 	echo "============================ Name Servers ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	 cat /etc/resolv.conf >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-
+	echo "Network Check [ OK ]"
 
 }
 
@@ -231,6 +238,7 @@ kernel(){
 	sudo lsmod >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
+	echo "Kernel parameters check [ OK ]"
 }
 
 
@@ -245,7 +253,7 @@ logs(){
 	sudo dmesg >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	sudo journalctl >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-
+	echo "system Logs check [ OK ]"
 
 }
 
@@ -277,7 +285,7 @@ Firewall(){
 
 	echo "=================================== Iptables Rules ========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	 sudo iptables-save >> /tmp/Admin_Fstep/Linux_DataInfo.txt
-
+	echo "Firewall Rules and configurations Check [ OK ]"
 
 }
 
@@ -287,7 +295,10 @@ suid(){
 
 	echo "=================================== check Suid ========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	sudo find / -perm 4000 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+	echo "suid Check [ OK ]"
 }
+
 
 
 
@@ -298,7 +309,7 @@ perm(){
 	sudo find / -perm 777 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	sudo find / -perm 775 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	sudo find / -perm 666 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
-
+	echo "Permissions Check [ OK ]"
 }
 
 
