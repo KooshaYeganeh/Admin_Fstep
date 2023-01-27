@@ -194,30 +194,30 @@ process(){
 
 network(){
 
-	net_info_dir=/tmp/Admin_Fstep/Network
-	if test -d "$net_info_dir"; then
-		    echo "$net_info_dir [ Exists ]"
-	    else
-		     mkdir /tmp/Admin_Fstep/Network
-	fi
-
-
+	echo "=================================== Network Connections ======================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 	
 	echo "Check Network Connections:"
 
 
-	 sudo netstat -tulpn > /tmp/Admin_Fstep/Network/network_conections.txt
-	echo "=================================================================================" > /tmp/Admin_Fstep/Network/network_connections.txt
-	echo "============================Detail===============================================" > /tmp/Admin_Fstep/Network/network_connections.txt
+	 sudo netstat -tulpn >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo netstat -anp >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "=================================================================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================ Detail ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
-	 sudo netstat -anp > /tmp/Admin_Fstep/Network/network_connections.txt
 
-	 sudo lsof -i > /tmp/Admin_Fstep/Network/openFiles.txt
+	echo "============================ open Files ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo lsof -i >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	 sudo ss > /tmp/Admin_Fstep/Network/socket.txt
+	 echo "============================ Monitor All Network Connections (ss) ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo ss >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
-	cat /etc/resolv.conf > /tmp/Admin_Fstep/Network/resolv.txt
+	 echo "============================ Monitor tcp Listening Connections (ss) ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo ss -lt  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 echo "============================ Monitor udp Listening Connections (ss) ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo ss -lu  >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "============================ Name Servers ===============================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 cat /etc/resolv.conf >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 
