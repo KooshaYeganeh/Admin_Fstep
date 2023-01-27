@@ -284,7 +284,38 @@ Firewall(){
 
 
 suid(){
-	sudo find / -perm /4000 > /tmp/Admin_Fstep/SUID
+
+	echo "=================================== check Suid ========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	sudo find / -perm 4000 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+}
+
+
+
+perm(){
+
+	echo "==================================== check Permissions =======================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	echo "Start check Permissions of system [ Please Wait ] ..."
+	sudo find / -perm 777 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	sudo find / -perm 775 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	sudo find / -perm 666 >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+
+}
+
+
+result(){
+
+
+
+echo -e "\n<< What This Script Done >> \n"
+
+DATA=(1.OS_Information 2.user_Information 3.check_Virtual_or_Physical 4.check_Hardware 5.check_Apps_or_Programs 6.check_process 7.check_Network 8.check_Kernel_paramaters 9.check_Logs 10.check_Firewall 11.check_suid 12.check_Permissions)
+
+for d in ${DATA[@]};do
+	echo $d
+	sleep 1
+done
+
+
 }
 
 
@@ -308,6 +339,8 @@ menu(){
 		logs
 		Firewall
 		suid
+		perm
+		result
 	elif [ "$option" = 2 ];then
 		exit 0
 	else
@@ -316,3 +349,5 @@ menu(){
 }
 
 menu
+
+
