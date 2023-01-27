@@ -275,7 +275,8 @@ Firewall(){
 		echo "Firerwalld Not installed On system"
 	fi
 
-	 sudo iptables-save >  /tmp/Admin_Fstep/Firewall/iptables_dump 
+	echo "=================================== Iptables Rules ========================================" >> /tmp/Admin_Fstep/Linux_DataInfo.txt
+	 sudo iptables-save >> /tmp/Admin_Fstep/Linux_DataInfo.txt
 
 
 }
